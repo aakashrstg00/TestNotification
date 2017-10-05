@@ -10,27 +10,49 @@
         var Activity = false;
         $(document).ready(function() {
             window.addEventListener('blur', function() {
-                new Notification("TEST CANCELLED", {
-                    body: "You shifted focus from the window",
-                    icon: 'icon.png'
-                });
-                Activity = true;
-                Cancel();
+                if (!Activity) {
+                    new Notification("TEST CANCELLED", {
+                        body: "You shifted focus from the window",
+                        icon: 'icon.png'
+                    });
+                    Activity = true;
+                    Cancel();
+                }
             });
 
             function Cancel() {
                 if (Activity) {
-                    $('#output').html("Window was closed!!");
+                    $('#output').html("Window was left!! TEST CANCELLED");
                     $('.container').addClass('text-muted');
+                    //$('html').css('pointer-events', 'none');
+
                 }
             }
+
+
         });
+
+    </script>
+    <script>
+        function ll() {
+            alert("LL");
+        }
+
+        function pass() {
+            var ansf = prompt("Password Required", "asjdfhasdijf");
+            if (ansf == "asjdfhasdijf") alert("Password Accepted");
+            else(pass());
+        }
+        window.onbeforeunload = pass;
+
     </script>
 </head>
 
 <body>
     <div class="container text-center">
-        <div class="display-2" id="dont">DON'T LEAVE THIS WINDOW</div>
+        <div class="display-2 my-5"><strong>TEST</strong></div>
+        <div class="display-4 my-5" id="dont">DON'T LEAVE THIS WINDOW</div>
+        <button onclick="ll()" class="btn my-3">ALERT</button>
         <div id="output"></div>
     </div>
 </body>
